@@ -389,12 +389,12 @@
         <section class="proj-section">
             <details class="accordion">
                 <summary>
-       <span class="acc-title">
-        DB 설계 포인트
-       </span>
+            <span class="acc-title">
+                DB 설계 포인트
+            </span>
                     <span class="acc-desc">
-        설계 의도 및 근거
-       </span>
+                예약 기반 신뢰 리뷰를 위한 설계 의도
+            </span>
                 </summary>
                 <div class="acc-body">
                     <ul class="bullet">
@@ -402,31 +402,49 @@
                             <code>
                                 Reservation
                             </code>
-                            &ndash; 예약 상태(예약/방문완료/취소) 관리
+                            &ndash; 예약이 “방문 근거”의 출발점이 되도록 설계하고, 예약 상태(예약/방문완료/취소/노쇼)로 리뷰 작성 가능 여부를 통제
                         </li>
                         <li>
                             <code>
                                 Review
                             </code>
-                            &ndash; 예약 FK 연결로 &ldquo;방문 근거&rdquo; 확보
+                            &ndash; 리뷰를 예약(ResNo)과 연결해 ‘실방문 리뷰’만 노출 가능하게 하고, 별점(ReviewEstimation)과 추천수(ReviewRecommendation)를 분리해 평점 조작 리스크를 낮춤
                         </li>
                         <li>
                             <code>
-                                Payment
+                                Store
                             </code>
-                            &ndash; 결제/갱신 이력 저장, 멤버십 만료 처리
+                            &ndash; 매장 기본정보(주소/연락처/편의시설)와 운영정보(스케줄)를 분리 수준으로 관리해, 노출 정책/검색/필터 요구가 늘어도 확장 가능하게 구성
                         </li>
                         <li>
                             <code>
-                                Report
+                                Menu
                             </code>
-                            &ndash; 신고 데이터 관리 및 관리자 제재 근거 확보
+                            &ndash; 메뉴를 Store FK로 종속시켜 매장별 메뉴/가격 변동을 이력화(업데이트 시간)할 수 있게 하고, 상세 설명을 길게 저장해 SEO/검색 품질을 확보
+                        </li>
+                        <li>
+                            <code>
+                                WishList
+                            </code>
+                            &ndash; “찜”을 단순 교차 테이블로 두어 조회가 빠르고, 개인화 추천/재방문 유도(찜 기반 알림, 인기 매장 등) 기능 확장에 유리
+                        </li>
+                        <li>
+                            <code>
+                                Inquiry
+                            </code>
+                            &ndash; 문의/CS를 별도 테이블로 관리해 운영 대응(처리 상태, 응답 SLA)을 구조화하고, 신고/분쟁 케이스의 증빙 흐름으로 연결 가능
+                        </li>
+                        <li>
+                            <code>
+                                AutoLogin
+                            </code>
+                            &ndash; 토큰/만료를 별도 관리해 보안(세션 탈취 대응)과 기기별 로그인 유지 정책을 서버에서 통제 가능
                         </li>
                         <li>
                             <code>
                                 Advertisement
                             </code>
-                            &ndash; 노출 정책 변경에 대비해 분리
+                            &ndash; 광고를 리뷰/매장과 분리해 노출 정책(기간/소재/문구) 변경에도 데이터 모델이 흔들리지 않도록 설계
                         </li>
                     </ul>
                 </div>
@@ -436,13 +454,14 @@
         <section class="proj-section">
             <details class="accordion">
                 <summary>
-       <span class="acc-title">
-        기술적 고민
-       </span>
+            <span class="acc-title">
+                기술적 고민
+            </span>
                     <span class="acc-desc">
-        해결 전략 및 트레이드오프
-       </span>
+                해결 전략 및 트레이드오프
+            </span>
                 </summary>
+
                 <div class="acc-body">
                     <ul class="bullet">
                         <li>
