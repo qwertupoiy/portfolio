@@ -116,11 +116,17 @@ body {
 }
 
 .sidebar-footer {
-  margin-top: auto;
-  text-align: center;
-  font-size: 0.8rem;
-  color: #777;
-  padding-top: 15px;
+    margin-top: auto;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.sidebar-footer p {
+    font-size: 0.7rem;
+    color: #bbb;
+    letter-spacing: 0.05rem;
+    margin: 0;
+    font-weight: 400;
 }
 
 .theme-toggle {
@@ -128,7 +134,7 @@ body {
   background: #fff;
   border-radius: 999px;
   padding: 4px 11px 5px;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   cursor: pointer;
 }
 
